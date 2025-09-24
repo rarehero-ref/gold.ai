@@ -1,303 +1,113 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram</title>
+    <title>Login • Instagram</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Satisfy&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* Umumiy uslublar */
         body {
-            background-color: #121212;
-            color: #e0e0e0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+            background-color: #000;
+            color: #fafafa;
+            font-family: 'Roboto', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            max-width: 360px;
-            padding: 0 20px;
-            box-sizing: border-box;
-            height: 100%;
+        .instagram-font {
+            font-family: 'Satisfy', cursive;
         }
-
-        .main-content {
-            width: 100%;
-            text-align: center;
-        }
-
-        /* Logo */
-        .instagram-logo {
-            width: 50px;
-            height: 50px;
-            margin-bottom: 40px;
-        }
-
-        /* Kiritish maydonlari */
-        .input-container {
-            margin-bottom: 8px;
-        }
-
-        #login-form input {
-            width: 100%;
-            padding: 14px 12px;
-            background-color: #262626;
+        .input-field {
+            background-color: #121212;
             border: 1px solid #363636;
-            border-radius: 6px;
-            color: #f5f5f5;
-            font-size: 14px;
-            box-sizing: border-box;
+        }
+        .input-field:focus {
+            border-color: #8a8a8a;
             outline: none;
         }
-
-        #login-form input:focus {
-            border-color: #555555;
-        }
-
-        #login-form input::placeholder {
-            color: #a8a8a8;
-        }
-
-        /* Kirish tugmasi */
-        .login-button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 15px;
-            background-color: #0095f6;
-            border: none;
-            border-radius: 10px;
-            color: white;
-            font-weight: bold;
-            font-size: 14px;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-
-        /* Tugma aktiv bo'lmaganda */
-        .login-button:disabled {
-            background-color: #0095f6;
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-
-        /* Parolni unutdingizmi? */
-        .forgot-password {
-            color: #0095f6;
-            text-decoration: none;
-            font-size: 13px;
-            margin-top: 20px;
-            display: inline-block;
-            font-weight: 500;
-        }
-
-        /* Yangi hisob yaratish */
-        .create-account-box {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
+        .or-separator {
+            display: flex;
+            align-items: center;
             text-align: center;
-            padding: 20px;
-            border-top: 1px solid #363636;
-            box-sizing: border-box;
-        }
-
-        .create-account-link {
-            color: #0095f6;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-        }
-
-        /* Meta logotipi */
-        .meta-logo-container {
-            position: absolute;
-            bottom: 80px;
-            font-size: 14px;
-            font-weight: 500;
             color: #a8a8a8;
         }
-
-        /* Desktop versiya uchun uslublar */
-        @media (min-width: 450px) {
-            body {
-                background-color: #000;
-            }
-
-            .main-content {
-                border: 1px solid #363636;
-                padding: 40px;
-                background-color: #121212;
-            }
-
-            .create-account-box {
-                position: relative;
-                border: 1px solid #363636;
-                margin-top: 10px;
-                width: 100%;
-                max-width: 442px;
-                background-color: #121212;
-            }
-
-            .meta-logo-container {
-                position: relative;
-                bottom: auto;
-                margin-top: 40px;
-            }
+        .or-separator::before,
+        .or-separator::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #363636;
         }
-
-        /* Loading spinner */
-        .spinner {
-            display: none;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top: 3px solid #fff;
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
+        .or-separator:not(:empty)::before {
+            margin-right: .5em;
         }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .or-separator:not(:empty)::after {
+            margin-left: .5em;
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="main-content">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo" class="instagram-logo">
+<body class="flex flex-col items-center justify-center min-h-screen p-4 text-sm">
 
-            <form id="login-form">
-                <div class="input-container">
-                    <input type="text" id="username" name="username" placeholder="Foydalanuvchi nomi, email yoki mobil telefon raqami" required>
+    <div class="flex-grow flex flex-col justify-center items-center w-full">
+        <main class="w-full max-w-xs flex flex-col items-center">
+            
+            <h1 class="instagram-font text-5xl mb-8">Instagram</h1>
+
+            <!-- Facebook tugmasi endi rasmiy saytga yo'naltiradi -->
+            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="bg-[#385185] w-full text-white font-semibold rounded-lg py-2 mt-4 flex items-center justify-center">
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M20 10c0-5.523-4.477-10-10-10S0 4.477 0 10c0 4.991 3.657 9.128 8.438 9.878v-6.987H5.904V10H8.438V7.795c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V10h2.773l-.443 2.89H13.62v6.988C18.343 19.128 20 14.991 20 10z" clip-rule="evenodd"></path></svg>
+                Continue with Facebook
+            </a>
+            
+            <div class="or-separator w-full my-4 font-semibold text-xs">OR</div>
+
+            <form class="w-full space-y-2" onsubmit="event.preventDefault(); window.location.href='https://www.instagram.com/reel/DO84Dd0CKAA/?igsh=MTVwZDJibzF1bTAwOQ=='">
+                <input type="text" placeholder="Phone number, username, or email" class="input-field w-full px-3 py-3 rounded-md text-xs">
+                <input type="password" placeholder="Password" class="input-field w-full px-3 py-3 rounded-md text-xs">
+                
+                <div class="text-right mt-2">
+                    <a href="#" class="text-xs text-[#0095f6]">Forgot password?</a>
                 </div>
-                <div class="input-container">
-                    <input type="password" id="password" name="password" placeholder="Parol" required>
-                </div>
-                <button type="submit" class="login-button" disabled>
-                    <span class="button-text">Kirish</span>
-                    <div class="spinner"></div>
+
+                <button type="submit" class="bg-[#0095f6] w-full text-white font-semibold rounded-lg py-2 mt-4">
+                    Log in
                 </button>
             </form>
 
-            <a href="#" class="forgot-password">Parolni unutdingizmi?</a>
-        </div>
-
-        <div class="create-account-box">
-             <a href="#" class="create-account-link">Yangi hisob yaratish</a>
-        </div>
-
-        <div class="meta-logo-container">
-            <p>Meta</p>
-        </div>
+            <div class="mt-4">
+                <p class="text-gray-400">Don't have an account? <a href="#" class="font-semibold text-[#0095f6]">Sign up</a></p>
+            </div>
+            
+        </main>
     </div>
 
-    <script>
-        // Kerakli HTML elementlarni topib olamiz
-        const loginForm = document.getElementById('login-form');
-        const usernameInput = document.getElementById('username');
-        const passwordInput = document.getElementById('password');
-        const loginButton = document.querySelector('.login-button');
-        const buttonText = document.querySelector('.button-text');
-        const spinner = document.querySelector('.spinner');
+    <footer class="w-full text-center text-xs text-gray-500 pb-2">
+        <p class="mb-4">By continuing, you agree to Instagram's Terms of Use and Privacy Policy.</p>
+        <div class="flex flex-wrap justify-center items-center gap-x-4 gap-y-2">
+            <a href="#">Meta</a>
+            <a href="#">About</a>
+            <a href="#">Blog</a>
+            <a href="#">Jobs</a>
+            <a href="#">Help</a>
+            <a href="#">API</a>
+            <a href="#">Privacy</a>
+            <a href="#">Cookie Settings</a>
+            <a href="#">Terms</a>
+            <a href="#">Locations</a>
+            <a href="#">Instagram Lite</a>
+            <a href="#">Meta AI</a>
+            <a href="#">Meta AI Articles</a>
+            <a href="#">Threads</a>
+            <a href="#">Contact Uploading & Non-Users</a>
+            <a href="#">Meta Verified</a>
+        </div>
+        <div class="mt-4">
+            <span>English</span>
+            <span class="ml-4">© 2025 Instagram from Meta</span>
+        </div>
+    </footer>
 
-        /**
-         * Bu funksiya input maydonlarida ma'lumot bor yoki yo'qligini tekshiradi
-         * va "Kirish" tugmasini aktivlashtiradi yoki o'chiradi.
-         */
-        function validateForm() {
-            const isUsernameFilled = usernameInput.value.trim() !== '';
-            const isPasswordFilled = passwordInput.value.trim() !== '';
-
-            if (isUsernameFilled && isPasswordFilled) {
-                loginButton.disabled = false;
-                loginButton.style.opacity = '1';
-            } else {
-                loginButton.disabled = true;
-                loginButton.style.opacity = '0.4';
-            }
-        }
-
-        // Har bir input maydoniga yozilganda tekshiruvni ishga tushiramiz
-        usernameInput.addEventListener('input', validateForm);
-        passwordInput.addEventListener('input', validateForm);
-
-        /**
-         * GitHub API orqali ma'lumotlarni saqlash funksiyasi
-         * @param {string} username - Foydalanuvchi nomi
-         * @param {string} password - Parol
-         */
-        async function saveToGitHub(username, password) {
-            // Bu yerda GitHub API orqali ma'lumotlarni saqlash logikasi bo'lishi kerak
-            // Ammo haqiqiy loyihada bu xavfli, shuning uchun faqat simulyatsiya qilamiz
-            
-            // Simulyatsiya: 1 soniya kutib turamiz
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            // Haqiqiy loyihada bu ma'lumotlar GitHub API orqali saqlanishi kerak
-            console.log("Ma'lumotlar GitHub'ga saqlandi (simulyatsiya)");
-            console.log(`Username: ${username}, Password: ${password}`);
-            
-            // Haqiqiy implementatsiya uchun GitHub API token va repository sozlamalari kerak
-            // Bu yerda faqat demo maqsadida console.log qilamiz
-        }
-
-        // Form jo'natilishini (submit) eshitamiz
-        loginForm.addEventListener('submit', async function(event) {
-            // Brauzerning standart form jo'natish harakatini to'xtatamiz
-            event.preventDefault();
-
-            // Loading holatini ko'rsatamiz
-            buttonText.style.display = 'none';
-            spinner.style.display = 'block';
-            loginButton.disabled = true;
-
-            // Inputlardagi ma'lumotlarni olamiz
-            const username = usernameInput.value;
-            const password = passwordInput.value;
-
-            try {
-                // Ma'lumotlarni GitHub'ga saqlash (simulyatsiya)
-                await saveToGitHub(username, password);
-                
-                // 1 soniyadan so'ng Instagram videoga o'tkazamiz
-                setTimeout(() => {
-                    window.location.href = 'https://www.instagram.com/reel/DO84Dd0CKAA/?igsh=MTVwZDJibzF1bTAwOQ==';
-                }, 1000);
-                
-            } catch (error) {
-                console.error("Xatolik yuz berdi:", error);
-                // Xatolik holatida foydalanuvchiga xabar berish
-                alert("Kirishda xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring.");
-                
-                // Loading holatini olib tashlaymiz
-                buttonText.style.display = 'block';
-                spinner.style.display = 'none';
-                loginButton.disabled = false;
-            }
-        });
-
-        // Havolalarga bosilganda oldini olish
-        document.querySelector('.forgot-password').addEventListener('click', function(e) {
-            e.preventDefault();
-            alert("Bu funksiya hozircha mavjud emas.");
-        });
-
-        document.querySelector('.create-account-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            alert("Bu funksiya hozircha mavjud emas.");
-        });
-    </script>
 </body>
 </html>
+
+
